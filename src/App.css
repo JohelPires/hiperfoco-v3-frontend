@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  background-color: #4c4d50;
-  color: #c8ccd6;
+  background-color: #dfdfdf;
+  /* color: #c8ccd6; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,6 +17,12 @@
 
 h1 {
   margin: 0;
+  font-size: 32px;
+  /* color: #c8ccd6; */
+}
+h2 {
+  font-size: 26px;
+  /* color: #c8ccd6; */
 }
 
 .navbar {
@@ -65,7 +71,7 @@ h1 {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Button from '@mui/material/Button'
 
 function PomodoroClock() {
   const [seconds, setSeconds] = useState(25 * 60) // default value is 25 minutes
@@ -29,9 +30,9 @@ function PomodoroClock() {
       <div>{`${minutes.toString().padStart(2, '0')}:${remainingSeconds
         .toString()
         .padStart(2, '0')}`}</div>
-      <button onClick={handleStartStopClick}>
+      <Button onClick={handleStartStopClick}>
         {isRunning ? 'Stop' : 'Start'}
-      </button>
+      </Button>
       <div>Stats ... </div>
     </div>
   )

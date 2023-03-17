@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+// import './styles/bootstrap.min.css'
 import './App.css'
 import { fetchMyData } from './api/api'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
 // import { useState } from 'react'
 import PomodoroClock from './components/PomodoroClock'
 import TaskList from './components/TaskList'
 import NavBar from './components/NavBar'
+import { Button } from '@mui/material'
 
 function AddTask() {
-  return <h2>Adicionar tarefa</h2>
+  return <Button>Adicionar tarefa</Button>
 }
 
 function App() {
@@ -202,18 +208,19 @@ function App() {
         <PomodoroClock />
         <AddTask />
       </div>
+
       {data && (
         <div style={{ display: 'flex' }}>
           <TaskList
-            title='Tarefas a fazer'
+            title='Tarefas da semana'
             dados={data.filter((d) => d.status === 0)}
           />
           <TaskList
-            title='Tarefas em execução'
+            title='Tarefas de hoje'
             dados={data.filter((d) => d.status === 1)}
           />
           <TaskList
-            title='Tarefas da semana'
+            title='Tarefas concluídas'
             dados={data.filter((d) => d.status === 2)}
           />
         </div>
