@@ -9,7 +9,7 @@ function TaskList(props) {
       <div>
         {props.dados.map((d) => {
           // console.log(d)
-          return <Task d={d} />
+          return <Task d={d} setRefreshData={props.refresh} />
         })}
       </div>
     </div>

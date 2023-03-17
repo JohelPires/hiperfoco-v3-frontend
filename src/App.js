@@ -18,12 +18,13 @@ import TaskEditor from './components/TaskEditor'
 function App() {
   const [openTaskEditor, setOpenTaskEditor] = useState(false)
   const [data, setData] = useState('')
+  const [refreshData, setRefreshData] = useState('')
 
   useEffect(() => {
     fetchMyData()
       .then((data) => setData(data))
       .catch((error) => console.error(error))
-  }, [])
+  }, [openTaskEditor, refreshData])
 
   const handleTaskEditorWindow = () => {
     setOpenTaskEditor(true)
@@ -221,14 +222,17 @@ function App() {
           <TaskList
             title='Tarefas da semana'
             dados={data.filter((d) => d.status === 0)}
+            refresh={setRefreshData}
           />
           <TaskList
             title='Tarefas de hoje'
             dados={data.filter((d) => d.status === 1)}
+            refresh={setRefreshData}
           />
           <TaskList
             title='Tarefas concluídas'
             dados={data.filter((d) => d.status === 2)}
+            refresh={setRefreshData}
           />
         </div>
       )}
