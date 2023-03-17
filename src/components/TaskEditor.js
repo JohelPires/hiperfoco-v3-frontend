@@ -1,36 +1,107 @@
-import React from 'react'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
+import React, { useState } from 'react'
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  DialogActions,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from '@mui/material'
+import { postData } from '../api/api'
+// import Button from '@mui/material/Button'
+// import TextField from '@mui/material/TextField'
+// import Dialog from '@mui/material/Dialog'
+// import DialogActions from '@mui/material/DialogActions'
+// import DialogContent from '@mui/material/DialogContent'
+// import DialogContentText from '@mui/material/DialogContentText'
+// import DialogTitle from '@mui/material/DialogTitle'
 
-function TaskEditor() {
+function TaskEditor({ open, handleClose, modo }) {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [priority, setPriority] = useState(2)
+  // const [formData, setFormData] = useState({})
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    switch (name) {
+      case 'title':
+        setTitle(value)
+        break
+      case 'description':
+        setDescription(value)
+        break
+      case 'priority':
+        setPriority(value)
+        break
+      default:
+        break
+    }
+  }
+
+  function handleConcluir(event) {
+    console.log(title, description, priority)
+
+    postData({ title, desc: description, priority })
+    handleClose()
+  }
+
   return (
     <div>
       {' '}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>
+          {modo ? 'Editar tarefa ' : 'Adicionar Tarefa'}
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          {/* <DialogContentText>
             To subscribe to this website, please enter your email address here.
             We will send updates occasionally.
-          </DialogContentText>
+          </DialogContentText> */}
+          {/* <form onSubmit={'handleSubmit'}> */}
           <TextField
-            autoFocus
-            margin='dense'
-            id='name'
-            label='Email Address'
-            type='email'
+            label='Tarefa'
+            name='title'
+            value={title}
+            onChange={handleChange}
             fullWidth
-            variant='standard'
+            required
+            margin='normal'
           />
+          <TextField
+            placeholder='Descrição da tarefa'
+            name='description'
+            value={description}
+            onChange={handleChange}
+            rows={5}
+            multiline
+            fullWidth
+          />
+          <FormControl fullWidth margin='normal'>
+            <InputLabel>Prioridade</InputLabel>
+            <Select
+              name='priority'
+              value={priority}
+              onChange={handleChange}
+              required
+              defaultValue='2'
+            >
+              <MenuItem value={1}>Alta</MenuItem>
+              <MenuItem defaultChecked value={2}>
+                Normal
+              </MenuItem>
+              <MenuItem value={3}>Baixa</MenuItem>
+            </Select>
+          </FormControl>
+          {/* </form> */}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={handleClose}>Cancelar</Button>
+          <Button onClick={handleConcluir}>Concluir</Button>
         </DialogActions>
       </Dialog>
     </div>

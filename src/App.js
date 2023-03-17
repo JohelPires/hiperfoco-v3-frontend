@@ -13,12 +13,10 @@ import PomodoroClock from './components/PomodoroClock'
 import TaskList from './components/TaskList'
 import NavBar from './components/NavBar'
 import { Button } from '@mui/material'
-
-function AddTask() {
-  return <Button>Adicionar tarefa</Button>
-}
+import TaskEditor from './components/TaskEditor'
 
 function App() {
+  const [openTaskEditor, setOpenTaskEditor] = useState(false)
   const [data, setData] = useState('')
 
   useEffect(() => {
@@ -27,7 +25,9 @@ function App() {
       .catch((error) => console.error(error))
   }, [])
 
-  // console.log(dado)
+  const handleTaskEditorWindow = () => {
+    setOpenTaskEditor(true)
+  }
 
   // const [data, setData] = useState([
   //   {
@@ -206,7 +206,14 @@ function App() {
       <NavBar />
       <div className='top-container'>
         <PomodoroClock />
-        <AddTask />
+      </div>
+      <div className='add-task'>
+        <Button onClick={handleTaskEditorWindow}>Adicionar tarefa</Button>
+        <TaskEditor
+          open={openTaskEditor}
+          handleClose={() => setOpenTaskEditor(false)}
+          edit={false}
+        />
       </div>
 
       {data && (
