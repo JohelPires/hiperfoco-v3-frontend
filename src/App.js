@@ -213,7 +213,7 @@ function App() {
         <TaskEditor
           open={openTaskEditor}
           handleClose={() => setOpenTaskEditor(false)}
-          edit={false}
+          task={{}}
         />
       </div>
 

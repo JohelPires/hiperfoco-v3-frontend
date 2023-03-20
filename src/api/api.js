@@ -36,3 +36,15 @@ export function deleteTask(id) {
       console.error(error)
     })
 }
+
+export function updateTask(id, body) {
+  const url = `http://localhost:5001/api/v1/tasks/${id}`
+  return axios
+    .patch(url, body)
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}

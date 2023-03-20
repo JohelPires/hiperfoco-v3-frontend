@@ -20,10 +20,17 @@ import { postData } from '../api/api'
 // import DialogContentText from '@mui/material/DialogContentText'
 // import DialogTitle from '@mui/material/DialogTitle'
 
-function TaskEditor({ open, handleClose, modo }) {
+function TaskEditor({ open, handleClose, task }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [priority, setPriority] = useState(2)
+  // if (task !== undefined) {
+  //   console.log(task._id)
+  //   // setTitle((t) => (t = task.title))
+  //   // setDescription(task.description)
+  //   // setPriority(task.priority)
+  // }
+
   // const [formData, setFormData] = useState({})
 
   const handleChange = (event) => {
@@ -47,6 +54,9 @@ function TaskEditor({ open, handleClose, modo }) {
     console.log(title, description, priority)
 
     postData({ title, desc: description, priority })
+    setTitle('')
+    setPriority(2)
+    setDescription('')
     handleClose()
   }
 
@@ -54,9 +64,7 @@ function TaskEditor({ open, handleClose, modo }) {
     <div>
       {' '}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>
-          {modo ? 'Editar tarefa ' : 'Adicionar Tarefa'}
-        </DialogTitle>
+        <DialogTitle>{task ? 'Editar tarefa' : 'Adicionar Tarefa'}</DialogTitle>
         <DialogContent>
           {/* <DialogContentText>
             To subscribe to this website, please enter your email address here.
@@ -81,8 +89,9 @@ function TaskEditor({ open, handleClose, modo }) {
             multiline
             fullWidth
           />
-          <FormControl fullWidth margin='normal'>
-            <InputLabel>Prioridade</InputLabel>
+          {/* <p>Configurações:</p> */}
+          <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
+            <InputLabel id='demo-select-small'>Prioridade</InputLabel>
             <Select
               name='priority'
               value={priority}
@@ -97,6 +106,17 @@ function TaskEditor({ open, handleClose, modo }) {
               <MenuItem value={3}>Baixa</MenuItem>
             </Select>
           </FormControl>
+          {/* <Select
+            name='status'
+            value={status}
+            onChange={handleChange}
+            required
+            defaultValue='0'
+          >
+            <MenuItem value={0}>Semana</MenuItem>
+            <MenuItem value={1}>Hoje</MenuItem>
+          </Select> */}
+
           {/* </form> */}
         </DialogContent>
         <DialogActions>

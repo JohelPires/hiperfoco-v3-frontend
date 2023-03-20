@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import { Button, ButtonGroup } from 'react-bootstrap'
 // import Dropdown from 'react-bootstrap/Dropdown'
 // import DropdownButton from 'react-bootstrap/DropdownButton'
@@ -7,7 +7,10 @@ import { IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { deleteTask } from '../api/api'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import CheckIcon from '@mui/icons-material/Check'
+import { deleteTask, updateTask } from '../api/api'
+import TaskEditor from './TaskEditor'
 
 function Task({ d, setRefreshData }) {
   const priorityColorStyle = [
@@ -21,18 +24,38 @@ function Task({ d, setRefreshData }) {
     deleteTask(d._id)
     setRefreshData(d._id)
   }
+  function handleChangeStatus() {
+    let body = 0
+    if (d.status < 2) {
+      body = { status: d.status + 1 }
+    } else {
+      body = { status: 1 }
+    }
+    // const body = { status: newStatus }
+    updateTask(d._id, body)
+    setRefreshData(Math.random())
+  }
 
   return (
     <div className='list-item' style={priorityColorStyle[d.priority - 1]}>
       <div className='list-item-title'>
         {d.title}
         <div className='list-item-title-controls'>
-          <IconButton aria-label='delete' size='small'>
+          <IconButton aria-label='edit' size='small'>
             <EditIcon fontSize='inherit' />
           </IconButton>
-
-          <IconButton aria-label='delete' size='small'>
-            <ArrowForwardIosIcon fontSize='inherit' />
+          <IconButton
+            aria-label='status-change'
+            size='small'
+            onClick={handleChangeStatus}
+          >
+            {d.status === 0 ? (
+              <ArrowForwardIosIcon fontSize='inherit' />
+            ) : d.status === 1 ? (
+              <CheckIcon fontSize='inherit' />
+            ) : (
+              <ArrowBackIosIcon fontSize='inherit' />
+            )}
           </IconButton>
           <IconButton aria-label='delete' size='small' onClick={handleDelete}>
             <DeleteIcon fontSize='inherit' />
