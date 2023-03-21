@@ -7,10 +7,12 @@ function TaskList(props) {
       <h2>{props.title}</h2>
       {/* <Task /> */}
       <div>
-        {props.dados.map((d) => {
-          // console.log(d)
-          return <Task d={d} key={d._id} setRefreshData={props.refresh} />
-        })}
+        {props.dados
+          .sort((a, b) => a.priority - b.priority)
+          .map((d) => {
+            // console.log(d)
+            return <Task d={d} key={d._id} setRefreshData={props.refresh} />
+          })}
       </div>
     </div>
   )

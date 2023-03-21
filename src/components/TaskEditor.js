@@ -72,6 +72,7 @@ function TaskEditor({ open, handleClose, task }) {
           </DialogContentText> */}
           {/* <form onSubmit={'handleSubmit'}> */}
           <TextField
+            autoFocus
             label='Tarefa'
             name='title'
             value={title}
