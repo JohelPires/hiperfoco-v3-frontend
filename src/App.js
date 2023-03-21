@@ -12,8 +12,9 @@ import '@fontsource/roboto/700.css'
 import PomodoroClock from './components/PomodoroClock'
 import TaskList from './components/TaskList'
 import NavBar from './components/NavBar'
-import { Button } from '@mui/material'
+import { Box, Button, Grid } from '@mui/material'
 import TaskEditor from './components/TaskEditor'
+import { Container } from '@mui/system'
 
 function App() {
   const [openTaskEditor, setOpenTaskEditor] = useState(false)
@@ -203,18 +204,40 @@ function App() {
   // ])
 
   return (
-    <div className='App'>
+    <Box
+      display='flex'
+      justifyContent='center'
+      alignItems='center'
+      minHeight='100vh'
+      className='App'
+    >
       <NavBar />
-      <div className='top-container'>
-        <PomodoroClock />
-      </div>
-      <div className='add-task'>
-        <Button onClick={handleTaskEditorWindow}>Adicionar tarefa</Button>
-        <TaskEditor
-          open={openTaskEditor}
-          handleClose={() => setOpenTaskEditor(false)}
-        />
-      </div>
+      <Grid
+        container
+        spacing={2}
+        // padding={10}
+        margin={2}
+        // direction='column'
+        alignItems='center'
+        justifyContent='center'
+        style={{ width: '100vw' }}
+      >
+        <Grid xs={3}>
+          <div className='add-task'>
+            <Button onClick={handleTaskEditorWindow}>Adicionar tarefa</Button>
+            <TaskEditor
+              open={openTaskEditor}
+              handleClose={() => setOpenTaskEditor(false)}
+            />
+          </div>
+        </Grid>
+        <Grid xs={4}>
+          <PomodoroClock />
+        </Grid>
+        <Grid xs={3}>
+          <PomodoroClock />
+        </Grid>
+      </Grid>
 
       {data && (
         <div style={{ display: 'flex' }}>
@@ -235,7 +258,7 @@ function App() {
           />
         </div>
       )}
-    </div>
+    </Box>
   )
 }
 

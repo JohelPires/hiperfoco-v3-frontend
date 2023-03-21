@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <nav>
       <div className='logo'>
-        <h1>Hiperfoco</h1>
+        <h2>Hiperfoco</h2>
       </div>
       <div className='menu-container'>
         <ul className='menu'>

@@ -29,9 +29,9 @@ function PomodoroClock() {
   return (
     <div className='PomodoroContainer'>
       <h6>Pomodoro</h6>
-      <div>{`${minutes.toString().padStart(2, '0')}:${remainingSeconds
+      {/* <div>{`${minutes.toString().padStart(2, '0')}:${remainingSeconds
         .toString()
-        .padStart(2, '0')}`}</div>
+        .padStart(2, '0')}`}</div> */}
       <div className='progressbar'>
         <CircularProgressbar
           value={25 * 60 - seconds}
