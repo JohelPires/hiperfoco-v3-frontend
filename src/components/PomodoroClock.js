@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Button, CircularProgress, Typography } from '@mui/material'
+import { Button, CircularProgress, Grid, Typography } from '@mui/material'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
 function PomodoroClock() {
   const [seconds, setSeconds] = useState(25 * 60) // default value is 25 minutes
@@ -28,31 +29,31 @@ function PomodoroClock() {
 
   return (
     <div className='PomodoroContainer'>
-      <h6>Pomodoro</h6>
+      <div className='dash-title'>
+        <h6>Pomodoro</h6>
+      </div>
       {/* <div>{`${minutes.toString().padStart(2, '0')}:${remainingSeconds
         .toString()
         .padStart(2, '0')}`}</div> */}
-      <div className='progressbar'>
-        <CircularProgressbar
-          value={25 * 60 - seconds}
-          text={`${minutes.toString().padStart(2, '0')}:${remainingSeconds
-            .toString()
-            .padStart(2, '0')}`}
-        />
+      <div className='pomo-content'>
+        <div className='progressbar'>
+          <CircularProgressbar
+            value={25 * 60 - seconds}
+            text={`${minutes.toString().padStart(2, '0')}:${remainingSeconds
+              .toString()
+              .padStart(2, '0')}`}
+          />
+        </div>
+        <div className='pomo-controles'>
+          <Button
+            startIcon={<PlayCircleFilledIcon />}
+            onClick={handleStartStopClick}
+          >
+            {isRunning ? 'Stop' : 'Start'}
+          </Button>
+          <Button>Reset</Button>
+        </div>
       </div>
-      <CircularProgress
-        variant='determinate'
-        value={((minutes * 60 + seconds) / 1500) * 100}
-        size={100}
-        thickness={2}
-        sx={{ mb: 2 }}
-      >
-        <Typography> teste</Typography>
-      </CircularProgress>
-      <Button onClick={handleStartStopClick}>
-        {isRunning ? 'Stop' : 'Start'}
-      </Button>
-      <div>Stats ... </div>
     </div>
     // <Box
     //   sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}

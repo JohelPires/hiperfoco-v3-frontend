@@ -14,7 +14,6 @@ import TaskList from './components/TaskList'
 import NavBar from './components/NavBar'
 import { Box, Button, Grid } from '@mui/material'
 import TaskEditor from './components/TaskEditor'
-import { Container } from '@mui/system'
 
 function App() {
   const [openTaskEditor, setOpenTaskEditor] = useState(false)
@@ -206,9 +205,9 @@ function App() {
   return (
     <Box
       display='flex'
-      justifyContent='center'
+      // justifyContent='center'
       alignItems='center'
-      minHeight='100vh'
+      // minHeight='100vh'
       className='App'
     >
       <NavBar />
@@ -220,10 +219,10 @@ function App() {
         // direction='column'
         alignItems='center'
         justifyContent='center'
-        style={{ width: '100vw' }}
+        style={{ width: '92vw' }}
       >
-        <Grid xs={3}>
-          <div className='add-task'>
+        <Grid xs={4}>
+          <div className='add-task PomodoroContainer'>
             <Button onClick={handleTaskEditorWindow}>Adicionar tarefa</Button>
             <TaskEditor
               open={openTaskEditor}
@@ -234,30 +233,36 @@ function App() {
         <Grid xs={4}>
           <PomodoroClock />
         </Grid>
-        <Grid xs={3}>
+        <Grid xs={4}>
           <PomodoroClock />
         </Grid>
-      </Grid>
 
-      {data && (
-        <div style={{ display: 'flex' }}>
-          <TaskList
-            title='Tarefas da semana'
-            dados={data.filter((d) => d.status === 0)}
-            refresh={setRefreshData}
-          />
-          <TaskList
-            title='Tarefas de hoje'
-            dados={data.filter((d) => d.status === 1)}
-            refresh={setRefreshData}
-          />
-          <TaskList
-            title='Tarefas concluídas'
-            dados={data.filter((d) => d.status === 2)}
-            refresh={setRefreshData}
-          />
-        </div>
-      )}
+        {data && (
+          <div style={{ display: 'flex' }}>
+            <Grid xs={4}>
+              <TaskList
+                title='Tarefas da semana'
+                dados={data.filter((d) => d.status === 0)}
+                refresh={setRefreshData}
+              />
+            </Grid>
+            <Grid xs={4}>
+              <TaskList
+                title='Tarefas de hoje'
+                dados={data.filter((d) => d.status === 1)}
+                refresh={setRefreshData}
+              />
+            </Grid>
+            <Grid xs={4}>
+              <TaskList
+                title='Tarefas concluídas'
+                dados={data.filter((d) => d.status === 2)}
+                refresh={setRefreshData}
+              />
+            </Grid>
+          </div>
+        )}
+      </Grid>
     </Box>
   )
 }
