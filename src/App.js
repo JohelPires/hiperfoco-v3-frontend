@@ -12,24 +12,48 @@ import '@fontsource/roboto/700.css'
 import PomodoroClock from './components/PomodoroClock'
 import TaskList from './components/TaskList'
 import NavBar from './components/NavBar'
+import Auth from './components/Auth'
 import { Box, Button, Grid } from '@mui/material'
+// import {
+//   TextField,
+//   FormControl,
+//   InputLabel,
+//   MenuItem,
+//   Select,
+// } from '@mui/material'
 import TaskEditor from './components/TaskEditor'
+import { useClg } from './useClg'
 
 function App() {
   const [openTaskEditor, setOpenTaskEditor] = useState(false)
   const [data, setData] = useState('')
   const [refreshData, setRefreshData] = useState('')
 
+  // Login ============
+  const [logged, setLogged] = useState(false)
+
+  // ========================
+  // Implementar o useReducer para os dados:
+
+  // as ações de CRUD podem ficar dentro do useReducer,
+  // que já atualiza o data state e ainda chama as
+  // funções da api do banco de dados
+
+  // ========================
+
   useEffect(() => {
     fetchMyData()
       .then((data) => setData(data))
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        console.error(error)
+      })
   }, [openTaskEditor, refreshData])
 
   const handleTaskEditorWindow = () => {
     setOpenTaskEditor(true)
   }
 
+  useClg(data)
   // const [data, setData] = useState([
   //   {
   //     _id: '63ed7dd7f95d71f7c7fcc655',
@@ -211,58 +235,63 @@ function App() {
       className='App'
     >
       <NavBar />
-      <Grid
-        container
-        spacing={2}
-        // padding={10}
-        margin={2}
-        // direction='column'
-        alignItems='center'
-        justifyContent='center'
-        style={{ width: '92vw' }}
-      >
-        <Grid xs={4}>
-          <div className='add-task PomodoroContainer'>
-            <Button onClick={handleTaskEditorWindow}>Adicionar tarefa</Button>
-            <TaskEditor
-              open={openTaskEditor}
-              handleClose={() => setOpenTaskEditor(false)}
-            />
-          </div>
-        </Grid>
-        <Grid xs={4}>
-          <PomodoroClock />
-        </Grid>
-        <Grid xs={4}>
-          <PomodoroClock />
-        </Grid>
+      {logged ? (
+        <Grid
+          container
+          spacing={2}
+          // padding={10}
+          // margin={2}
+          // direction='column'
+          alignItems='center'
+          justifyContent='center'
+          style={{ width: '92vw' }}
+        >
+          <Grid item xs={4}>
+            <div className='add-task PomodoroContainer'>
+              <Button onClick={handleTaskEditorWindow}>Adicionar tarefa</Button>
 
-        {data && (
-          <div style={{ display: 'flex' }}>
-            <Grid xs={4}>
-              <TaskList
-                title='Tarefas da semana'
-                dados={data.filter((d) => d.status === 0)}
-                refresh={setRefreshData}
+              <TaskEditor
+                open={openTaskEditor}
+                handleClose={() => setOpenTaskEditor(false)}
               />
-            </Grid>
-            <Grid xs={4}>
-              <TaskList
-                title='Tarefas de hoje'
-                dados={data.filter((d) => d.status === 1)}
-                refresh={setRefreshData}
-              />
-            </Grid>
-            <Grid xs={4}>
-              <TaskList
-                title='Tarefas concluídas'
-                dados={data.filter((d) => d.status === 2)}
-                refresh={setRefreshData}
-              />
-            </Grid>
-          </div>
-        )}
-      </Grid>
+            </div>
+          </Grid>
+          <Grid item xs={4}>
+            <PomodoroClock />
+          </Grid>
+          <Grid item xs={4}>
+            <PomodoroClock />
+          </Grid>
+
+          {data && (
+            <div style={{ display: 'flex' }}>
+              <Grid xs={4}>
+                <TaskList
+                  title='Tarefas da semana'
+                  dados={data.filter((d) => d.status === 0)}
+                  refresh={setRefreshData}
+                />
+              </Grid>
+              <Grid xs={4}>
+                <TaskList
+                  title='Tarefas de hoje'
+                  dados={data.filter((d) => d.status === 1)}
+                  refresh={setRefreshData}
+                />
+              </Grid>
+              <Grid xs={4}>
+                <TaskList
+                  title='Tarefas concluídas'
+                  dados={data.filter((d) => d.status === 2)}
+                  refresh={setRefreshData}
+                />
+              </Grid>
+            </div>
+          )}
+        </Grid>
+      ) : (
+        <Auth />
+      )}
     </Box>
   )
 }

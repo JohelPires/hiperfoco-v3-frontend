@@ -30,9 +30,9 @@ h2 {
   /* color: #c8ccd6; */
 }
 
-.navbar {
+/* .navbar {
   display: flex;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -47,11 +47,11 @@ h2 {
 }
 
 .add-task {
-  height: 150px;
+  /* height: 150px; */
 }
 
 .Container {
-  margin: 10px;
+  /* margin: 10px; */
   /* width: 29vw; */
   /* background-color: #444c5f; */
   /* background: linear-gradient(to right, #4e576b, #434b5a); */
@@ -61,7 +61,7 @@ h2 {
 .PomodoroContainer {
   background-color: white;
   /* margin-top: 20px; */
-  margin: 10px;
+  /* margin: 10px; */
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -75,6 +75,13 @@ h2 {
   /* width: 45vw; */
   /* margin-right: 50px; */
 }
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
 .dash-title {
   padding-top: 0;
   padding-bottom: 20px;

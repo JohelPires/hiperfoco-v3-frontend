@@ -3,15 +3,16 @@ nav {
   justify-content: space-between;
   align-items: center;
   /* padding: 1rem; */
-  width: 90vw;
+  width: 92vw;
   /* background-color: #686868; */
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
   color: white;
-  background-color: rgb(26, 33, 87);
+  background-color: rgb(24, 72, 104);
   margin-top: 10px;
   padding: 3px 10px;
   border-radius: 5px;
   box-shadow: 0px 3px 10px rgb(32, 32, 32, 0.4);
+  margin-bottom: 20px;
 }
 
 .logo {
@@ -38,11 +39,11 @@ nav {
 
 .menu li a {
   text-decoration: none;
-  color: #636363;
+  color: #bdbdbd;
   font-weight: bold;
   transition: color 0.2s ease-in-out;
 }
 
 .menu li a:hover {
-  color: #28588f;
+  color: #ffffff;
 }
